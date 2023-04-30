@@ -1,14 +1,42 @@
 "use strict";
 
-const hello = (req, res) => {
-    res.render('home/index');
+const output = {
+    home: (req, res) => {
+        res.render('home/index');
+    },
+    login: (req, res) => {
+        res.render('home/login');
+    },
 };
 
-const login = (req, res) => {
-    res.render('home/login');
+const users = {
+    id: ["call", "chanlee", "김부장쓰벌롬" ],
+    pw: ["1", "1007", "999" ],
 };
+
+const process = {
+    login: (req, res) => {
+        const id = req.body.id,
+            pw = req.body.pw;
+
+        if (users.id.includes(id)) {
+            const idx = users.id.indexOf(id);
+            if (users.pw[idx] === pw) {
+                return res.json({
+                    success: true,
+                });
+            } else {
+                return res.json({
+                    success: false,
+                    msg: "로그인에 실패하셨습니다.",
+                });
+            };
+        };
+    },
+};
+
 
 module.exports = {
-    hello,
-    login,
+    output,
+    process,
 };
