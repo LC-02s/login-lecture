@@ -9,11 +9,15 @@ const idEl = document.getElementById("id"),
 registerBtnEl.addEventListener('click', register);
 
 function register() {
+    if (!idEl.value) return alert("아이디를 입력해주십시오.");
+    if (!nameEl.value) return alert("이름을 입력해주십시오.");
+    if (!pwEl.value) return alert("비밀번호를 입력해주십시오.");
+    if (pwEl.value !== confirmPwEl.value) return alert("비밀번호가 일치하지 않습니다.");
+
     const req = {
         id: idEl.value,
         name: nameEl.value,
         pw: pwEl.value,
-        confirmPw: confirmPwEl.value,
     };
 
     console.log(JSON.stringify(req));
